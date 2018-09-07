@@ -48,15 +48,15 @@ PC上位机通过TCP连接服务器8080端口，实施接受经过服务器转�
 
 # 参考
 
-[Netty实战精髓](https://www.w3cschool.cn/essential_netty_in_action/ "Netty实战精髓")
+[Netty实战精髓-w3cSchool](https://www.w3cschool.cn/essential_netty_in_action/ "Netty实战精髓-w3cSchool")
 
-[Netty实战](https://book.douban.com/subject/27038538/ "Netty实战-何平")
+[Netty实战-何平译](https://book.douban.com/subject/27038538/ "Netty实战-何平译")
 
 [Java菜鸟教程](http://www.runoob.com/java/java-tutorial.html "Java菜鸟教程")
 
 [MongoDB菜鸟教程](http://www.runoob.com/mongodb/mongodb-tutorial.html "MongoDB菜鸟教程")
 
-[Java笔记](http://neyzoter.cn/2018/09/07/Netty-EventLoopGroup-EventLoop-Channel-Channle-ChannlePipeline-et/ "Java笔记")
+[Java笔记](http://neyzoter.cn/wiki/Java/ "Java笔记")
 
 [对Netty组件的理解（Channel、Pipeline、EventLoop等）](http://neyzoter.cn/wiki/Java/ "对Netty组件的理解（Channel、Pipeline、EventLoop等）")
 
