@@ -60,7 +60,7 @@ PC上位机通过TCP连接服务器8080端口，实施接受经过服务器转�
 
 [对Netty组件的理解（Channel、Pipeline、EventLoop等）](http://neyzoter.cn/wiki/Java/ "对Netty组件的理解（Channel、Pipeline、EventLoop等）")
 
-[Maven笔记]（http://neyzoter.cn/wiki/MAVEN/ "Maven笔记")
+[Maven笔记](http://neyzoter.cn/wiki/MAVEN/ "Maven笔记")
 
 [Netty笔记](http://neyzoter.cn/wiki/Netty/ "Netty笔记")
 
