@@ -1,6 +1,5 @@
 package com.nesc.NettyServer;
 
-import io.netty.buffer.ByteBuf;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -39,11 +38,4 @@ public class AppTest
         assertTrue( true );
     }
 
-//	public static void main(String[] args){
-//		ByteBufferTest byteb = new ByteBufferTest();
-//		byteb.l = (long)(byteb.b[0]<<8)|(long)byteb.b[1];
-//		System.out.println(byteb.b[0]);
-//		System.out.println(byteb.b[1]);
-//		System.out.println(byteb.l);
-//	}
 }
