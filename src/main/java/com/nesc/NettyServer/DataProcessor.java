@@ -25,7 +25,6 @@ public class DataProcessor {
 	private final byte HEAD_FRAME_LENGTH = 16;//一帧的头的长度，包括yyyy_mm_dd、headtime、adc_count等
 	private final short CHECK_UBYTE = 15;//校验开始的位置，和headtime的低八位相等
 	
-	
 	private final int WIFI_CLIENT_ID_IDX = 12;//这里保存wifi模组的id的下标
 	private final int YYYY_MM_DD_START_IDX = 0;//年月日开始的下标,下标越大，越高位
 	private final int HEADTIME_START_IDX = 4;//毫秒开始的下标
@@ -120,7 +119,7 @@ public class DataProcessor {
 		}
 		/*获取设备的id*/
 		wifi_client_id = msg.getUnsignedByte(WIFI_CLIENT_ID_IDX);
-		System.out.println("Client Id:"+wifi_client_id);
+//		System.out.println("Client Id:"+wifi_client_id);
 		
 		/*校验设备的id*/
 		if((wifi_client_id<0) ||(wifi_client_id>WIFI_CLIENT_ID_MAX)) {
@@ -157,11 +156,11 @@ public class DataProcessor {
 				System.out.println("count error:abandoned");
 			return false;
 		}
-		System.out.println("adc data len:"+adc_count);
+//		System.out.println("adc data len:"+adc_count);
 		/*获取io电平*/
 		io1 = msg.getUnsignedByte(IO1_IDX);
 		io2 = msg.getUnsignedByte(IO2_IDX);		
-		System.out.printf("io1:%d  io2:%d\n",io1,io2);
+//		System.out.printf("io1:%d  io2:%d\n",io1,io2);
 		return true;
 	}	
 

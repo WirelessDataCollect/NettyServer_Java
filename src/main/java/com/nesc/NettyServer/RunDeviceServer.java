@@ -21,7 +21,6 @@ import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 /**
 * 
@@ -37,6 +36,7 @@ public class RunDeviceServer implements Runnable{
 	private int listen_port = 5001;
 	private Thread t;
 	private String threadName;
+	private volatile static int packsNum = 0;
 	
 	/**
 	* 构造方法。
@@ -50,6 +50,30 @@ public class RunDeviceServer implements Runnable{
 		System.out.println("Creating thread:" +  threadName );
 //		getProtocolInfo();
 	}
+	/**
+	* 清除packsNum1s。
+	*
+	* @throws none
+	*/	
+	public static void resetPacksNum() {
+		packsNum = 0;
+	}
+	/**
+	* 增加packsNum1s。
+	*
+	* @throws none
+	*/	
+	public static void incPacksNum() {
+		packsNum ++;
+	}	
+	/**
+	* 获取packsNum的数值。
+	*
+	* @throws none
+	*/	
+	public static int getPacksNum() {
+		return packsNum;
+	}	
 	/**
 	* 获取UDP还是TCP协议，获取端口号。
 	*
@@ -200,7 +224,7 @@ class UDP_ServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 	
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {  //channelRead0在退出前，后面的不会打断
-		
+		RunDeviceServer.incPacksNum();  //每次进入数据接受，都要更新包裹数目
 		//如果数字超过了127,则会变成负数为了解决这个问题需要用getUnsignedByte
 		ByteBuf temp = msg.content();
 		DeviceServerTools.send2Pc(temp.copy());
@@ -247,6 +271,7 @@ class TCP_ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
+        	RunDeviceServer.incPacksNum();//1秒钟内的包++
     		ByteBuf temp = (ByteBuf)msg;
     		DeviceServerTools.send2Pc(temp.copy());
     		processor.dataProcess(temp);
@@ -276,6 +301,10 @@ class TCP_ServerHandler extends ChannelInboundHandlerAdapter {
 * @version 0.0.1
 */
 class DeviceServerTools{
+	/**
+	 * 转发设备信息至PC端上位机
+	 * @param temp
+	 */
 	protected static void send2Pc(ByteBuf temp) {   //这里需要是静态的，非静态依赖对象
 		synchronized(RunPcServer.getChMap()) {
 			for(Iterator<Map.Entry<String,Channel>> item = RunPcServer.getChMap().entrySet().iterator();item.hasNext();) {
