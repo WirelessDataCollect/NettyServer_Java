@@ -197,7 +197,7 @@ public class DataProcessor {
 	/**
 	* 打印每个通道的两个电压数值，用来检查。以电压形式展示。
 	* 
-	*
+	* 
 	* @param buf 以short格式（每个short对因一个12位adc数据）存储的adc数据
 	* @param idx1 第一个数据下标
 	* @param idx2 第二个数据下标

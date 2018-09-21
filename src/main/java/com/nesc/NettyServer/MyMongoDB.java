@@ -18,7 +18,8 @@ public class MyMongoDB{
 	public MongoCollection<Document> collection;
 	protected MongoClient mongoClient;
 	protected MongoDatabase mongoDatabase;
-	private final String col_name = "data";
+	private String col_name = "data";
+	private String dbname = "udp";
 	
 	/**
 	* MongoDB数据库类的构造函数
@@ -28,14 +29,15 @@ public class MyMongoDB{
 	* @throws 无
 	*/
 	MyMongoDB(String dbname) {
+		this.dbname = dbname;
 		try{
 			if(collection == null) {
 				/* 连接到 mongodb 服务*/
 				 mongoClient = MongoClients.create();
 				   
 				     /* 连接到数据库*/
-				 mongoDatabase = mongoClient.getDatabase(dbname);  
-				 System.out.printf("Connect to db:%s successfully\n",dbname);
+				 mongoDatabase = mongoClient.getDatabase(this.dbname);  
+				 System.out.printf("Connect to db:%s successfully\n",this.dbname);
 				 collection = mongoDatabase.getCollection(col_name);
 				 System.out.printf("Connect to col:%s successfully\n",col_name);
 			}	    
@@ -45,6 +47,19 @@ public class MyMongoDB{
 			  System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		  }    	
 	}
-	
+	/**
+	 * 获取对象连接的数据库
+	 * @return dbname：本次操作
+	 */
+	public String getDbname() {
+		return dbname;
+	}
+	/**
+	 * 获取对象操作的集合
+	 * @return col_name：本次操作集合名称
+	 */
+	public String getColname() {
+		return col_name;
+	}	
 	
 }
