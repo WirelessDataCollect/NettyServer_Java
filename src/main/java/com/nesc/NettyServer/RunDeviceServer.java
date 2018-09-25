@@ -228,7 +228,7 @@ class UDP_ServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 		RunDeviceServer.incPacksNum();  //每次进入数据接受，都要更新包裹数目
 		//如果数字超过了127,则会变成负数为了解决这个问题需要用getUnsignedByte
 		ByteBuf temp = msg.content();
-		DeviceServerTools.send2Pc(temp.copy());
+		DeviceServerTools.send2Pc(temp);
 		processor.dataProcess(temp);
 
 	}
@@ -274,7 +274,7 @@ class TCP_ServerHandler extends ChannelInboundHandlerAdapter {
         try {
         	RunDeviceServer.incPacksNum();//1秒钟内的包++
     		ByteBuf temp = (ByteBuf)msg;
-    		DeviceServerTools.send2Pc(temp.copy());
+    		DeviceServerTools.send2Pc(temp);
     		processor.dataProcess(temp);
         } finally {
             // 抛弃收到的数据
@@ -310,7 +310,8 @@ class DeviceServerTools{
 		synchronized(RunPcServer.getChMap()) {
 			for(Iterator<Map.Entry<String,Channel>> item = RunPcServer.getChMap().entrySet().iterator();item.hasNext();) {
 				Map.Entry<String,Channel> entry = item.next();
-				ChannelFuture future = entry.getValue().pipeline().writeAndFlush(temp.copy());
+				ByteBuf temp1 = temp.copy();
+				ChannelFuture future = entry.getValue().pipeline().writeAndFlush(temp1);
 				future.addListener(new ChannelFutureListener(){
 					@Override
 					public void operationComplete(ChannelFuture f) {
@@ -319,6 +320,7 @@ class DeviceServerTools{
 						}
 					}
 				});
+				temp1.release();//释放
 			}	
 		}
 	}
