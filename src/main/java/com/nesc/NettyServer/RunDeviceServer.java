@@ -34,7 +34,7 @@ import io.netty.util.ReferenceCountUtil;
 */
 public class RunDeviceServer implements Runnable{
 	private String protocol = "UDP";
-	private int listen_port = 5001;
+	private int listen_port = 5004;
 	private Thread t;
 	private String threadName;
 	private volatile static int packsNum = 0;
