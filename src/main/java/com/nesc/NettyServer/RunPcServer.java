@@ -56,7 +56,7 @@ public class RunPcServer implements Runnable{
 	*/
 	RunPcServer( String name) {
 		threadName = name;
-		listen_port = 8081;
+		listen_port = 8080;
 		System.out.println("Creating thread:" +  threadName );
 		System.out.println("面向PC运行端口：" + listen_port);
 	}
@@ -160,7 +160,7 @@ class TCP_ServerHandler4PC  extends ChannelInboundHandlerAdapter {
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		Map<String,Channel> map_temp = RunPcServer.getChMap();
 
-		map_temp.remove(ctx.channel().toString());
+		map_temp.remove(ctx.channel().remoteAddress().toString());//移除这个通道
 		System.out.println("PC "+ctx.channel().remoteAddress().toString()+" disconnected!");
 		ctx.fireChannelInactive();
 	}

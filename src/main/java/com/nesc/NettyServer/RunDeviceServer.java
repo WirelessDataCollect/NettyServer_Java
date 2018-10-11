@@ -227,10 +227,13 @@ class UDP_ServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {  //channelRead0在退出前，后面的不会打断
 		RunDeviceServer.incPacksNum();  //每次进入数据接受，都要更新包裹数目
 		//如果数字超过了127,则会变成负数为了解决这个问题需要用getUnsignedByte
-		ByteBuf temp = msg.content();
+		ByteBuf temp =msg.content();
+	
+		//作为实参，cnt不会减小到0
+		//SimpleChannelInboundHandler父类包含了release对象的方法，不需要再release
 		DeviceServerTools.send2Pc(temp);
 		processor.dataProcess(temp);
-
+		
 	}
 	/**
 	 * 当channel建立的时候回调（不面向连接，也无法返回数据回去），不同于TCP
@@ -276,6 +279,7 @@ class TCP_ServerHandler extends ChannelInboundHandlerAdapter {
     		ByteBuf temp = (ByteBuf)msg;
     		DeviceServerTools.send2Pc(temp);
     		processor.dataProcess(temp);
+    		
         } finally {
             // 抛弃收到的数据
             ReferenceCountUtil.release(msg);//如果不是继承的SimpleChannel...则需要自行释放msg
@@ -307,6 +311,9 @@ class DeviceServerTools{
 	 * @param temp
 	 */
 	protected static void send2Pc(ByteBuf temp) {   //这里需要是静态的，非静态依赖对象
+		
+		//如果上位机在发送数据时断开连接，那么就会抛出异常
+		//IOException:连接被对方重置
 		synchronized(RunPcServer.getChMap()) {
 			for(Iterator<Map.Entry<String,Channel>> item = RunPcServer.getChMap().entrySet().iterator();item.hasNext();) {
 				Map.Entry<String,Channel> entry = item.next();
@@ -320,7 +327,6 @@ class DeviceServerTools{
 						}
 					}
 				});
-				temp1.release();//释放
 			}	
 		}
 	}
