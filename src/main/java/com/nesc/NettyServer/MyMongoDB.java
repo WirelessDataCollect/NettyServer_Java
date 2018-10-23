@@ -10,8 +10,8 @@ import com.mongodb.async.client.MongoDatabase;
 * 
 * MongoDB数据库类
 *
-* @author  nesc528
-* @Date    2018-9-7
+* @author  nesc418
+* @Date    2018-10-23
 * @version 0.0.1
 */
 public class MyMongoDB{

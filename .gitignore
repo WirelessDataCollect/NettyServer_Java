@@ -1,1 +1,4 @@
+# 删掉shell
+*.sh
+
 /target/

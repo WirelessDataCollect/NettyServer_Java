@@ -28,13 +28,13 @@ import io.netty.util.ReferenceCountUtil;
 * 运行UDP/TCP服务器，用于连接硬件设备
 *
 * 设备参考输入：12121212000000011212120102012022（只适用于固定adc_length为16）
-* @author  nesc528
-* @Date    2018-9-7
+* @author  nesc418
+* @Date    2018-10-23
 * @version 0.0.1
 */
 public class RunDeviceServer implements Runnable{
 	private String protocol = "UDP";
-	private int listen_port = 5004;
+	private int listen_port = 5001;
 	private Thread t;
 	private String threadName;
 	private volatile static int packsNum = 0;

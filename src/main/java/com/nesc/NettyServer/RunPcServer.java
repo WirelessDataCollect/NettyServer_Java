@@ -24,8 +24,8 @@ import io.netty.util.ReferenceCountUtil;
 * 
 * 运行TCP服务器，用于连接上位机
 *
-* @author  nesc528
-* @Date    2018-8-29
+* @author  nesc418
+* @Date    2018-10-23
 * @version 0.0.1
 */
 public class RunPcServer implements Runnable{

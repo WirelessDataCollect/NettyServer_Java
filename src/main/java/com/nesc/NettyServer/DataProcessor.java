@@ -13,8 +13,8 @@ import io.netty.buffer.ByteBuf;
 * 
 * 数据处理器，用于处理设备发送到服务器的ByteBuf数据
 *
-* @author  nesc528
-* @Date    2018-9-7
+* @author  nesc418
+* @Date    2018-10-23
 * @version 0.0.1
 */
 public class DataProcessor {

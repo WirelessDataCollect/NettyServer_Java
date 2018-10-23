@@ -3,8 +3,8 @@ package com.nesc.NettyServer;
 * 
 * 测试工具
 *
-* @author  nesc528
-* @Date    2018-9-13
+* @author  nesc418
+* @Date    2018-10-22
 * @version 0.0.1
 */
 public class TestTools implements Runnable{
