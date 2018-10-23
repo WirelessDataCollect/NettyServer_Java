@@ -2,4 +2,4 @@
 *.sh
 
 # 忽略文件
-target
+/target/*
