@@ -78,7 +78,7 @@ public class DataProcessor {
 		/*doc存入数据库*/
 		mongodb.collection.insertOne(doc, new SingleResultCallback<Void>() {
 		    public void onResult(final Void result, final Throwable t) {
-			        System.out.println("Document inserted!");
+//			        System.out.println("Document inserted!");
 		    }});
 	}
 
